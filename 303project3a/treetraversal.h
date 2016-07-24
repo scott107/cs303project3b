@@ -7,21 +7,21 @@
 #include <map>
 #include "Node.h"
 
-
 using namespace std; 
 
 class treetraversal
 {
 public:
 	treetraversal(){ ; }
-	void makeatree(Node &root, istream &input, map<char, string> &encode);
+	void makeatree(Node &root, istream &input, map<char, string> &encodemap);
 	Node* traversepoint(Node &node, string input);
 
 	void decode(Node node,string input);
+	void encode(Node node, string input, map<char, string> &encodemap);
 };
 
 //makes a 4 height binary tree, also map alphabet char to morsecode string  
-void treetraversal::makeatree(Node &root, istream &input, map<char, string> &encode)
+void treetraversal::makeatree(Node &root, istream &input, map<char, string> &encodemap)
 {
 	char morsechar;
 	string morsecode;
@@ -30,13 +30,15 @@ void treetraversal::makeatree(Node &root, istream &input, map<char, string> &enc
 	{
 		input >> morsechar;
 		input >> morsecode;
-		encode[morsechar] = morsecode;
+		encodemap[morsechar] = morsecode;
 		current = traversepoint(root, morsecode);
 		current->adddata(morsechar);
 	}
 
 }
 
+//makes nodes from the traversal of the morse code elements.  traverse left if element = "."
+//traverse right if element = "_"
 Node* treetraversal::traversepoint(Node &node, string input)
 {
 	Node* ptr = &node;
@@ -68,8 +70,10 @@ Node* treetraversal::traversepoint(Node &node, string input)
 	return ptr;
 }
 
+//decodes morse code into word string
 void treetraversal::decode(Node node,string input)
 {
+	//takes care of the space delimiter
 	istringstream morse_code(input);
 	string current;
 	
@@ -86,4 +90,24 @@ void treetraversal::decode(Node node,string input)
 	}
 
 	cout << endl;
+}
+
+
+void treetraversal::encode(Node node, string input, map<char, string> &encodemap)
+{
+	istringstream letters(input);
+	string current;
+	char code;
+
+	while (letters >> current)
+	{
+		for (int i = 0; i<current.size(); i++)
+		{
+			auto search = encodemap.find(current[i]);
+			if (search != encodemap.end())
+			{
+				cout << search->second << " ";
+			}
+		}
+	}
 }

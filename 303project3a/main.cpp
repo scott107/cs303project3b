@@ -10,18 +10,21 @@
 using namespace std;
  
 int main(){
+
 	map<char, string> code;
 	Node tree;
 	ifstream input("morse.txt");
 	treetraversal morsecode;
 	morsecode.makeatree(tree, input, code);
+
 	morsecode.decode(tree, " .... . ._.. ._.. ___ ");
+	morsecode.decode(tree, ".__ ___ ._. ._.. _..");
 
+	morsecode.encode(tree, "morsecode",code);
+
+
+	cout << endl << endl;
 	system("pause");
-
-
-
-
 
 	return 0;
 }
