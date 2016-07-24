@@ -20,10 +20,10 @@ int main(){
 	morsecode.decode(tree, " .... . ._.. ._.. ___ ");
 	morsecode.decode(tree, ".__ ___ ._. ._.. _..");
 
-	morsecode.encode(tree, "morsecode",code);
+	morsecode.encode(tree, "morsecode  5 ",code);
 
 
-	cout << endl << endl;
+	cout << endl;
 	system("pause");
 
 	return 0;

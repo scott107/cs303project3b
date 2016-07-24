@@ -34,7 +34,6 @@ void treetraversal::makeatree(Node &root, istream &input, map<char, string> &enc
 		current = traversepoint(root, morsecode);
 		current->adddata(morsechar);
 	}
-
 }
 
 //makes nodes from the traversal of the morse code elements.  traverse left if element = "."
@@ -77,6 +76,7 @@ void treetraversal::decode(Node node,string input)
 	istringstream morse_code(input);
 	string current;
 	
+	cout << "Decoding the morsecode " << input << " is: \n";
 	while(morse_code >> current)
 	{
 		Node* ptr = &node;
@@ -89,25 +89,21 @@ void treetraversal::decode(Node node,string input)
 		cout<<ptr->getdata();
 	}
 
-	cout << endl;
+	cout << endl << endl;
 }
 
 
 void treetraversal::encode(Node node, string input, map<char, string> &encodemap)
 {
+	//gets rid of any spaces before or after the word to encode
 	istringstream letters(input);
-	string current;
-	char code;
+	char current;
 
+	cout << "The morsecode for the word '" << input << "' is: ";
 	while (letters >> current)
 	{
-		for (int i = 0; i<current.size(); i++)
-		{
-			auto search = encodemap.find(current[i]);
-			if (search != encodemap.end())
-			{
-				cout << search->second << " ";
-			}
-		}
+		auto search = encodemap.find(current);
+		if (search != encodemap.end()) {cout << search->second << " ";}
+		else { cout << endl << current << " is not a valid character to encode.\n"; break; }
 	}
 }
