@@ -16,8 +16,11 @@ public:
 	treetraversal(){ ; }
 	void makeatree(Node &root, istream &input, map<char, string> &encode);
 	Node* traversepoint(Node &node, string input);
+
+	void decode(Node node,string input);
 };
 
+//makes a 4 height binary tree, also map alphabet char to morsecode string  
 void treetraversal::makeatree(Node &root, istream &input, map<char, string> &encode)
 {
 	char morsechar;
@@ -63,4 +66,24 @@ Node* treetraversal::traversepoint(Node &node, string input)
 		}
 	}
 	return ptr;
+}
+
+void treetraversal::decode(Node node,string input)
+{
+	istringstream morse_code(input);
+	string current;
+	
+	while(morse_code >> current)
+	{
+		Node* ptr = &node;
+		for(int i =0; i<current.size();i++)
+		{
+			if(current[i]=='.') {ptr = ptr->left;}
+			else {ptr = ptr->right;}
+		}
+
+		cout<<ptr->getdata();
+	}
+
+	cout << endl;
 }

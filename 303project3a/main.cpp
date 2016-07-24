@@ -15,6 +15,7 @@ int main(){
 	ifstream input("morse.txt");
 	treetraversal morsecode;
 	morsecode.makeatree(tree, input, code);
+	morsecode.decode(tree, " .... . ._.. ._.. ___ ");
 
 	system("pause");
 
