@@ -1,30 +1,26 @@
-#include <string>
 #include <iostream>
-#include <istream>
-#include <sstream>
 #include <fstream>
 #include "Node.h"
-#include <fstream>
 #include "treetraversal.h"
 
 using namespace std;
  
-int main(){
+void main(){
 
 	map<char, string> code;
-	Node tree;
-	ifstream input("morse.txt");
 	treetraversal morsecode;
+	Node tree;
+
+	ifstream input("morse.txt");//check if file exist
+	if (!input) { cout << "File does not exist\n"; system("pause"); exit(1); }
 	morsecode.makeatree(tree, input, code);
 
-	morsecode.decode(tree, " .... . ._.. ._.. ___ ");
+	//morse decode function
+	morsecode.decode(tree, " .... ...... ._.. ._.. ___ ");
 	morsecode.decode(tree, ".__ ___ ._. ._.. _..");
-
-	morsecode.encode(tree, "morsecode  5 ",code);
-
-
-	cout << endl;
+	//morse encode function
+	morsecode.encode(tree, "horse manure", code);
+	morsecode.encode(tree, "horse5 manure", code);
+	
 	system("pause");
-
-	return 0;
 }
